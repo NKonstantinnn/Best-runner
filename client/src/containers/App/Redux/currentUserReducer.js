@@ -3,7 +3,7 @@ import {
   fetchCurrentUserRequest,
   fetchCurrentUserSuccess,
   fetchCurrentUserFailure,
-} from './actions';
+} from './currentUserActions';
 
 const defaultState = {
   data: null,

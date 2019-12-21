@@ -1,9 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
-import ExampleContainer from '../../ExampleContrainer/index';
-import SignUpContainer from '../../SignUpContainer/index';
-import SignInContainer from '../../SignInContainer/index';
+import ExampleContainer from '../../ExampleContrainer';
+import SignUpContainer from '../../AuthContainer';
 import PrivateRoute from './PrivateRoute';
 
 const Routes = () => (
@@ -12,7 +11,6 @@ const Routes = () => (
     <Route path="/1" component={ExampleContainer} />
     <PrivateRoute path="/private" component={ExampleContainer} />
     <Route path="/signup" component={SignUpContainer} />
-    <Route path="/signin" component={SignInContainer} />
   </Switch>
 );
 

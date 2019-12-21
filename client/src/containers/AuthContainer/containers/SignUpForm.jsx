@@ -16,7 +16,7 @@ import {
 const SignUpForm = ({ handleSubmit }) => (
   <SignUpFormWrapper>
     <SignUpFormImage src="/images/logo.png" alt="logo" />
-    <SignUpFormTitle>Sign up</SignUpFormTitle>
+    <SignUpFormTitle>BestRunner<br />Sign up</SignUpFormTitle>
     <StyledSignUpForm onSubmit={handleSubmit}>
       <Field id="username" name="username" type="text" component={Input} label="Login" />
       <Field id="password" name="password" type="password" component={Input} label="Password" />
