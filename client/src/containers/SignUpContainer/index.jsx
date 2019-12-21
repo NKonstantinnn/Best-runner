@@ -1,28 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Row, Col } from 'reactstrap';
-import SignUp from './components/SignUp';
+import SignUpForm from './containers/SignUpForm';
 import { fetchSignUp } from './redux/actions';
+import SignUpWrapper from './styled';
 
-class SignUpContainer extends Component {
-  static propTypes = {
-    fetchSignUp: PropTypes.func.isRequired,
-  };
+const SignUpContainer = (props) => {
+  const handleSignUp = formValues => props.fetchSignUp(formValues);
 
-  handleSignUpFormSubmit = formValues => this.props.fetchSignUp(formValues);
+  return (
+    <SignUpWrapper>
+      <SignUpForm onSubmit={handleSignUp} />
+    </SignUpWrapper>
+  );
+};
 
-  render() {
-    return (
-      <Row className="justify-content-center">
-        <Col xs={4}>
-          <SignUp
-            onSubmit={this.handleSignUpFormSubmit}
-          />
-        </Col>
-      </Row>
-    );
-  }
-}
+SignUpContainer.propTypes = {
+  fetchSignUp: PropTypes.func.isRequired,
+};
 
 export default connect(null, { fetchSignUp })(SignUpContainer);

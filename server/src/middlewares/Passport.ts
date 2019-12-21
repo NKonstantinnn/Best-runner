@@ -32,20 +32,20 @@ class JWTAuth extends Passport {
     });
 
     this.use(new passportLocal.Strategy({
-        usernameField: 'email',
+        usernameField: 'username',
         passwordField: 'password',
       },
-      async (email: string, password: string, done: PassportStrategyDone): Promise<void> => {
-        const user = await UserModel.findOne({ email }).lean();
+      async (username: string, password: string, done: PassportStrategyDone): Promise<void> => {
+        const user = await UserModel.findOne({ username }).lean();
 
         if (!user) {
-          return done('Incorrect e-mail or password', null);
+          return done('Incorrect username or password', null);
         }
 
         const passwordCompareResult = await bcrypt.compare(password, user.password);
 
         if (!passwordCompareResult) {
-          return done('Incorrect e-mail or password', null);
+          return done('Incorrect username or password', null);
         }
 
         delete user.password;

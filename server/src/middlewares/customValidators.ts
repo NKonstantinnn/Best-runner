@@ -16,15 +16,17 @@ const isContains = (item: any, targetArray: any[]): boolean => {
   return targetArray.includes(item);
 };
 
-const isCustomEmail = (email: string): boolean => /^[-a-zA-Z0-9!#$%&'*+\/=?^_`{|}~\-\.]+@[a-z0-9.\-]+$/.test(email);
+const isUsername = (username: string): boolean => (
+  /^[^._ ](?:[\w-]|[\w-])+[^._ ]$/.test(username)
+);
 const isPassword = (password: string): boolean => (
   /(?=.*[0-9])(?=.*[а-яёa-z])(?=.*[A-ZА-ЯЁ])[0-9a-zA-Z.,';\]\[{}:"<>?!@#$%^&*()_\-+=|\/№А-Яа-яЁё]{6,}/.test(password)
 );
 
-const isUserNotExistsByEmail = async (email: string): Promise<void> => {
-  if (!email) { return Promise.resolve(); }
+const isUserNotExistsByUsername = async (username: string): Promise<void> => {
+  if (!username) { return Promise.resolve(); }
 
-  const user = await UserModel.findOne({ email });
+  const user = await UserModel.findOne({ username });
 
   if (user) { return Promise.reject('User not exists'); }
 
@@ -58,9 +60,9 @@ export default (): Handler => (
     customValidators: {
       isNotEmpty,
       isContains,
-      isCustomEmail,
+      isUsername,
       isPassword,
-      isUserNotExistsByEmail,
+      isUserNotExistsByUsername,
       isCaptchaVerified,
     },
   })

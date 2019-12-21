@@ -8,9 +8,10 @@ export const fetchSignUpFailure = createAction('FETCH_SIGN_UP_FAILURE');
 export const fetchSignUp = credentials => async (dispatch) => {
   try {
     dispatch(fetchSignUpRequest());
-
-    await api.auth.signUp(credentials);
-
+    const response = await api.auth.signUp(credentials);
+    console.log('sign up', response.data);
+    const { token } = response.data;
+    localStorage.setItem('bestrunnerToken', token);
     dispatch(fetchSignUpSuccess());
   } catch (error) {
     dispatch(fetchSignUpFailure(error));

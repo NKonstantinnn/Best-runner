@@ -39,15 +39,15 @@ class AuthController extends BaseController {
 
   public async signUp(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
-      const user = req.body;
-      const userDoc = {
-        email: user.email,
-        password: await bcrypt.hash(user.password),
-      };
+      const { username, password } = req.body;
+      const hashedPassword = await bcrypt.hash(password);
+      const user = { username, password: hashedPassword };
 
-      await UserModel.create(userDoc);
+      const dbUser: User = await UserModel.create(user);
+      const token = AuthService.generateToken(dbUser);
 
-      return res.status(201).send('Registration completed');
+      res.cookie('jwt', token, { httpOnly: true });
+      return res.status(201).json({ token, message: 'Registration completed', id: dbUser._id });
     } catch (err) {
       return next(err instanceof Error ? err : new VError(err));
     }

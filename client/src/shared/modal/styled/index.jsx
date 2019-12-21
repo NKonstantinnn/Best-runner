@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import { ClassNames } from '@emotion/core';
 
-Modal.setAppElement('#app');
+Modal.setAppElement('#root');
 
 export const defaultModalStyle = css => (css`
   position: absolute;
