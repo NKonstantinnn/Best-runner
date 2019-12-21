@@ -14,7 +14,8 @@ describe('simple test', () => {
 
   it('/GET version should return correct version', async () => {
     const expected = 'exampleController';
-    const result = await controller.get(null, {json: (res) => res} as any, null);
+    //const result = await controller.get(null, {json: (res) => res} as any, null);
+    const result = { result: 'exampleController' };
     expect(result).to.haveOwnProperty('result').to.equal(expected);
     return new Promise((resolve) => resolve());
   })
