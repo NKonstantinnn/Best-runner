@@ -26,6 +26,7 @@ export default handleActions(
         data: payload,
         isFetching: false,
         error: null,
+        isAuth: true,
       };
     },
     [fetchCurrentUserFailure](state, { payload }) {

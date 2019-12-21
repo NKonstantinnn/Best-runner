@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import SignUpForm from './containers/SignUpForm';
 import { fetchSignUp } from './redux/actions';
 import SignUpWrapper from './styled';
 
 const SignUpContainer = (props) => {
-  const handleSignUp = formValues => props.fetchSignUp(formValues);
+  const handleSignUp = (user) => {
+    const { history } = props;
+    props.fetchSignUp(user, history);
+  };
 
   return (
     <SignUpWrapper>
@@ -17,6 +22,16 @@ const SignUpContainer = (props) => {
 
 SignUpContainer.propTypes = {
   fetchSignUp: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-export default connect(null, { fetchSignUp })(SignUpContainer);
+const mapDispatchToProps = {
+  fetchSignUp,
+};
+
+export default compose(
+  withRouter,
+  connect(null, mapDispatchToProps),
+)(SignUpContainer);

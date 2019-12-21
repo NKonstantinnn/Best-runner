@@ -1,4 +1,4 @@
-import { get } from './base';
+import get from './base/get';
 import { apiUrl } from './base/axios';
 
 export default {

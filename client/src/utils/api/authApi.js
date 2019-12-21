@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { axios, get, post } from './base/index';
+import post from './base/post';
 import { apiUrl } from './base/axios';
 
 export default {

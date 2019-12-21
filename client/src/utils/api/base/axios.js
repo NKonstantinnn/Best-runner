@@ -1,9 +1,7 @@
-import axios from 'axios';
-
 export const apiUrl = '/api/v1';
 
-export const defaultParams = {
-  headers: { Authorization: localStorage.getItem('token') },
-};
-
-export default axios;
+export const getAuthParams = () => ({
+  headers: {
+    Authorization: localStorage.getItem('bestrunnerToken'),
+  },
+});

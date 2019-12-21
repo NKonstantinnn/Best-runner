@@ -1,3 +1,3 @@
-import axios, { defaultParams } from './axios';
+import axios from 'axios';
 
-export default (url, body, params = { ...defaultParams }) => axios.post(url, body, params);
+export default (url, body, params) => axios.post(url, body, params);
