@@ -20,7 +20,7 @@ const SignUpForm = ({ handleSubmit }) => (
     <StyledSignUpForm onSubmit={handleSubmit}>
       <Field id="username" name="username" type="text" component={Input} label="Login" />
       <Field id="password" name="password" type="password" component={Input} label="Password" />
-      <Field component={Captcha} id="captcha" name="captcha" label="Captcha" />
+      <Field id="captcha" name="captcha" component={Captcha} label="Captcha" />
       <SignUpButton type="submit" color="primary">Sign up</SignUpButton>
     </StyledSignUpForm>
   </SignUpFormWrapper>

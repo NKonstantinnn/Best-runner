@@ -26,7 +26,7 @@ export const StyledSignUpForm = styled(Form)`
     flex-direction: column;
     align-items: center;
 
-    div {
+    & > div {
         width: 100%;
     }
 `;
