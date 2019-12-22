@@ -16,7 +16,12 @@ import {
 } from './styled/Header';
 import Tab from '../../../shared/types/Tab';
 
-const Header = ({ activeTab, history, handleSignOut }) => (
+const Header = ({
+  activeTab,
+  history,
+  handleSignOut,
+  user,
+}) => (
   <StyledHeader>
     <Container>
       <HeaderContent>
@@ -36,7 +41,7 @@ const Header = ({ activeTab, history, handleSignOut }) => (
         <HeaderMenuBlock>
           <HeaderProfile>
             <HeaderProfileImage src="/images/avatar.png" />
-            <HeaderProfileUsername>testuser</HeaderProfileUsername>
+            <HeaderProfileUsername>{user.username}</HeaderProfileUsername>
           </HeaderProfile>
           <HeaderSignout onClick={() => handleSignOut(history)}>Sign out</HeaderSignout>
         </HeaderMenuBlock>
@@ -51,6 +56,9 @@ Header.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   handleSignOut: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withRouter(Header);

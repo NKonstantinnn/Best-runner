@@ -12,11 +12,12 @@ function Main(props) {
     children,
     isAuth,
     activeTab,
+    user,
   } = props;
 
   return (
     <main>
-      { isAuth && <Header activeTab={activeTab} handleSignOut={props.signOutCurrentUser} /> }
+      { isAuth && <Header activeTab={activeTab} handleSignOut={props.signOutCurrentUser} user={user} /> }
       <Container>
         {children}
       </Container>
@@ -24,19 +25,29 @@ function Main(props) {
   );
 }
 
+Main.defaultProps = {
+  user: {
+    username: '',
+  },
+};
+
 Main.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
   isAuth: PropTypes.bool.isRequired,
   activeTab: PropTypes.oneOf(Object.keys(Tab)).isRequired,
   signOutCurrentUser: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }),
 };
 
 const mapStateToProps = ({ currentUser, app }) => {
-  const { isAuth } = currentUser;
+  const { isAuth, user } = currentUser;
   const { activeTab } = app;
   return {
     activeTab,
     isAuth,
+    user,
   };
 };
 
