@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   StyledHeader,
@@ -16,7 +16,7 @@ import {
 } from './styled/Header';
 import Tab from '../../../shared/types/Tab';
 
-const Header = ({ activeTab }) => (
+const Header = ({ activeTab, history, handleSignOut }) => (
   <StyledHeader>
     <Container>
       <HeaderContent>
@@ -38,7 +38,7 @@ const Header = ({ activeTab }) => (
             <HeaderProfileImage src="/images/avatar.png" />
             <HeaderProfileUsername>testuser</HeaderProfileUsername>
           </HeaderProfile>
-          <HeaderSignout>Sign out</HeaderSignout>
+          <HeaderSignout onClick={() => handleSignOut(history)}>Sign out</HeaderSignout>
         </HeaderMenuBlock>
       </HeaderContent>
     </Container>
@@ -47,6 +47,10 @@ const Header = ({ activeTab }) => (
 
 Header.propTypes = {
   activeTab: PropTypes.oneOf(Object.keys(Tab)).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  handleSignOut: PropTypes.func.isRequired,
 };
 
-export default Header;
+export default withRouter(Header);

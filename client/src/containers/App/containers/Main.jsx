@@ -5,11 +5,18 @@ import { Container } from 'reactstrap';
 
 import Header from '../components/Header';
 import Tab from '../../../shared/types/Tab';
+import { signOutCurrentUser } from '../Redux/currentUserActions';
 
-function Main({ children, isAuth, activeTab }) {
+function Main(props) {
+  const {
+    children,
+    isAuth,
+    activeTab,
+  } = props;
+
   return (
     <main>
-      { isAuth && <Header activeTab={activeTab} /> }
+      { isAuth && <Header activeTab={activeTab} handleSignOut={props.signOutCurrentUser} /> }
       <Container>
         {children}
       </Container>
@@ -21,6 +28,7 @@ Main.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
   isAuth: PropTypes.bool.isRequired,
   activeTab: PropTypes.oneOf(Object.keys(Tab)).isRequired,
+  signOutCurrentUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ currentUser, app }) => {
@@ -32,4 +40,8 @@ const mapStateToProps = ({ currentUser, app }) => {
   };
 };
 
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = {
+  signOutCurrentUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

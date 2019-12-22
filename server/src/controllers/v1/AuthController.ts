@@ -17,7 +17,16 @@ class AuthController extends BaseController {
       this.signIn,
       this.signInError,
     );
-    this.router.post('/signup', validate(signUpSchema), this.signUp);
+    this.router.post(
+      '/signup',
+      validate(signUpSchema),
+      this.signUp
+    );
+    this.router.get(
+      '/signout',
+      passport.authenticate('jwt', {session: false}),
+      this.signOut
+    );
   }
 
   public signIn(req: Request, res: Response, next: NextFunction): Response | void {
@@ -48,6 +57,16 @@ class AuthController extends BaseController {
 
       res.cookie('jwt', token, { httpOnly: true });
       return res.status(201).json({ token, message: 'Registration completed', id: dbUser._id });
+    } catch (err) {
+      return next(err instanceof Error ? err : new VError(err));
+    }
+  }
+
+  public signOut(req: Request, res: Response, next: NextFunction): Response | void {
+    try {
+      req.user = null;
+      res.clearCookie('jwt');
+      return res.status(200).json('Signed out');
     } catch (err) {
       return next(err instanceof Error ? err : new VError(err));
     }
