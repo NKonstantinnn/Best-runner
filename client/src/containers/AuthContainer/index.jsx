@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
-import SignUpForm from './containers/SignUpForm';
-import { fetchSignUp } from './redux/actions';
+import SignUpForm from './containers/AuthForm';
+import { fetchAuth } from './redux/actions';
 import SignUpWrapper from './styled';
 
 const SignUpContainer = (props) => {
@@ -36,28 +36,29 @@ const SignUpContainer = (props) => {
     }
   };
 
-  const handleSignUp = (user) => {
+  const handleAuth = (user) => {
     validateSignUpForm(user);
-    const { history } = props;
-    props.fetchSignUp(user, history);
+    const { isSignUp, history } = props;
+    props.fetchAuth(user, isSignUp, history);
   };
 
   return (
     <SignUpWrapper>
-      <SignUpForm onSubmit={handleSignUp} />
+      <SignUpForm onSubmit={handleAuth} isSignUp={props.isSignUp} />
     </SignUpWrapper>
   );
 };
 
 SignUpContainer.propTypes = {
-  fetchSignUp: PropTypes.func.isRequired,
+  isSignUp: PropTypes.bool.isRequired,
+  fetchAuth: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
 const mapDispatchToProps = {
-  fetchSignUp,
+  fetchAuth,
 };
 
 export default compose(

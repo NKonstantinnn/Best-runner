@@ -1,21 +1,21 @@
 import { createAction } from 'redux-actions';
 import api from '../../../utils/ApiClient';
-import { fetchCurrentUser } from '../../App/Redux/actions';
+import { fetchCurrentUser } from '../../App/Redux/currentUserActions';
 
-export const fetchSignUpRequest = createAction('FETCH_SIGN_UP_REQUEST');
-export const fetchSignUpSuccess = createAction('FETCH_SIGN_UP_SUCCESS');
-export const fetchSignUpFailure = createAction('FETCH_SIGN_UP_FAILURE');
+export const fetchAuthRequest = createAction('FETCH_AUTH_REQUEST');
+export const fetchAuthSuccess = createAction('FETCH_AUTH_SUCCESS');
+export const fetchAuthFailure = createAction('FETCH_AUTH_FAILURE');
 
-export const fetchSignUp = (user, history) => async (dispatch) => {
+export const fetchAuth = (user, isSignUp, history) => async (dispatch) => {
   try {
-    dispatch(fetchSignUpRequest());
-    const response = await api.auth.signUp(user);
+    dispatch(fetchAuthRequest());
+    const authFunc = isSignUp ? api.auth.signUp : api.auth.signIn;
+    const response = await authFunc(user);
     const { token } = response.data;
     localStorage.setItem('bestrunnerToken', token);
-    dispatch(fetchSignUpSuccess());
+    dispatch(fetchAuthSuccess());
     dispatch(fetchCurrentUser(history));
-    history.push('/');
   } catch (error) {
-    dispatch(fetchSignUpFailure(error));
+    dispatch(fetchAuthFailure(error));
   }
 };

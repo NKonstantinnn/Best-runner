@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import ExampleContainer from '../../ExampleContrainer';
-import SignUpContainer from '../../AuthContainer';
+import AuthContainer from '../../AuthContainer';
 import PrivateRoute from './PrivateRoute';
 
 const Routes = () => (
@@ -10,7 +10,8 @@ const Routes = () => (
     <Route exact path="/" component={ExampleContainer} />
     <Route path="/1" component={ExampleContainer} />
     <PrivateRoute path="/private" component={ExampleContainer} />
-    <Route path="/signup" component={SignUpContainer} />
+    <Route path="/signup" render={props => <AuthContainer {...props} isSignUp />} />
+    <Route path="/signin" render={props => <AuthContainer {...props} isSignUp={false} />} />
   </Switch>
 );
 
