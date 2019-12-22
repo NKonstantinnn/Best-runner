@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions';
 import api from '../../../utils/ApiClient';
 import { fetchCurrentUser } from '../../App/Redux/currentUserActions';
+import showErrorMessage from '../../../utils/showErrorMessage';
 
 export const fetchAuthRequest = createAction('FETCH_AUTH_REQUEST');
 export const fetchAuthSuccess = createAction('FETCH_AUTH_SUCCESS');
@@ -16,6 +17,7 @@ export const fetchAuth = (user, isSignUp, history) => async (dispatch) => {
     dispatch(fetchAuthSuccess());
     dispatch(fetchCurrentUser(history));
   } catch (error) {
+    showErrorMessage(error);
     dispatch(fetchAuthFailure(error));
   }
 };
