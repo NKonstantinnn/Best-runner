@@ -9,7 +9,7 @@ const defaultState = {
   data: null,
   error: null,
   isFetching: false,
-  isAuth: false,
+  isAuth: true,
 };
 
 export default handleActions(

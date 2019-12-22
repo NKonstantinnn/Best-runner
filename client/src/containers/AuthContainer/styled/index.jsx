@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 
-const SignUpWrapper = styled.div`
+const AuthWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
 `;
 
-export default SignUpWrapper;
+export default AuthWrapper;

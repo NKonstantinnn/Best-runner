@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
-import SignUpForm from './containers/AuthForm';
+import AuthForm from './containers/AuthForm';
 import { fetchAuth } from './redux/actions';
-import SignUpWrapper from './styled';
+import AuthWrapper from './styled';
 
 const SignUpContainer = (props) => {
   const validateSignUpForm = (user) => {
@@ -43,9 +43,9 @@ const SignUpContainer = (props) => {
   };
 
   return (
-    <SignUpWrapper>
-      <SignUpForm onSubmit={handleAuth} isSignUp={props.isSignUp} />
-    </SignUpWrapper>
+    <AuthWrapper>
+      <AuthForm onSubmit={handleAuth} isSignUp={props.isSignUp} />
+    </AuthWrapper>
   );
 };
 

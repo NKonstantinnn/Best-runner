@@ -1,29 +1,52 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Container } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
-  Collapse,
-  Container,
-  Navbar,
-  Nav,
-  NavItem,
-} from 'reactstrap';
+  StyledHeader,
+  HeaderContent,
+  HeaderMenuBlock,
+  HeaderMenuItem,
+  HeaderSignout,
+  HeaderLogo,
+  HeaderLogoImage,
+  HeaderProfile,
+  HeaderProfileImage,
+  HeaderProfileUsername,
+} from './styled/Header';
+import Tab from '../../../shared/types/Tab';
 
-const Header = () => (
-  <Navbar expand dark color="dark">
+const Header = ({ activeTab }) => (
+  <StyledHeader>
     <Container>
-      <Collapse navbar className="w-100">
-        <NavLink className="navbar-brand" to="/">Aspirity Web Template</NavLink>
-        <Nav navbar className="ml-auto">
-          <NavItem className="mr-2">
-            <NavLink to="/signin" className="nav-link">Sign In</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/signup" className="nav-link">Sign Up</NavLink>
-          </NavItem>
-        </Nav>
-      </Collapse>
+      <HeaderContent>
+        <HeaderMenuBlock>
+          <HeaderLogo>
+            <Link to="/">
+              <HeaderLogoImage src="/images/logo.png" />
+            </Link>
+          </HeaderLogo>
+          <HeaderMenuItem active={activeTab === Tab.JOURNAL}>
+            <Link to="/">Journal</Link>
+          </HeaderMenuItem>
+          <HeaderMenuItem active={activeTab === Tab.CHARTS}>
+            <Link to="/charts">Charts</Link>
+          </HeaderMenuItem>
+        </HeaderMenuBlock>
+        <HeaderMenuBlock>
+          <HeaderProfile>
+            <HeaderProfileImage src="/images/avatar.png" />
+            <HeaderProfileUsername>testuser</HeaderProfileUsername>
+          </HeaderProfile>
+          <HeaderSignout>Sign out</HeaderSignout>
+        </HeaderMenuBlock>
+      </HeaderContent>
     </Container>
-  </Navbar>
+  </StyledHeader>
 );
+
+Header.propTypes = {
+  activeTab: PropTypes.oneOf(Object.keys(Tab)).isRequired,
+};
 
 export default Header;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Global, css } from '@emotion/core';
 
-import { GrayColor } from '../../../shared/styled/colors';
+import { GrayLightColor } from '../../../shared/styled/colors';
 
 const GlobalStyles = () => (
   <Global
@@ -21,7 +21,8 @@ const GlobalStyles = () => (
         }
         
         .app {
-          background-color: ${GrayColor};
+          background-color: ${GrayLightColor};
+          min-height: 100vh;
         }
       }
     `}
