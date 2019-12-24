@@ -9,12 +9,5 @@ db.connect();
 
 app.listen(config.get('http.port') || 8080);
 
-enum Enum {
-    Aprop = "A"
-}
-
-console.log('Aenum', Enum[Enum.]);
-console.log('Benum', Enum['B']);
-
 // for tests
 export default app;

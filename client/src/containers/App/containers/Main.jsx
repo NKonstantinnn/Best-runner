@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Container } from 'reactstrap';
 
+import withSpinner from '../../../shared/hocs/withSpinner';
+import Routes from '../components/Routes';
 import Header from '../components/Header';
 import Tab from '../../../shared/types/Tab';
-import { signOutCurrentUser } from '../Redux/currentUserActions';
+import { signOutCurrentUser, fetchCurrentUser } from '../Redux/currentUserActions';
+import { History } from '../../../shared/prop-types/index';
+
+const RoutesWithSpinner = withSpinner(Routes);
 
 function Main(props) {
   const {
@@ -13,12 +20,22 @@ function Main(props) {
     isAuth,
     activeTab,
     user,
+    isFetching,
+    history,
   } = props;
+
+  useEffect(
+    () => {
+      props.fetchCurrentUser(history);
+    },
+    [],
+  );
 
   return (
     <main>
       { isAuth && <Header activeTab={activeTab} handleSignOut={props.signOutCurrentUser} user={user} /> }
       <Container>
+        <RoutesWithSpinner isFetching={isFetching} />
         {children}
       </Container>
     </main>
@@ -39,20 +56,28 @@ Main.propTypes = {
   user: PropTypes.shape({
     username: PropTypes.string.isRequired,
   }),
+  isFetching: PropTypes.bool.isRequired,
+  fetchCurrentUser: PropTypes.func.isRequired,
+  history: History.isRequired,
 };
 
 const mapStateToProps = ({ currentUser, app }) => {
-  const { isAuth, user } = currentUser;
+  const { isAuth, user, isFetching } = currentUser;
   const { activeTab } = app;
   return {
     activeTab,
     isAuth,
     user,
+    isFetching,
   };
 };
 
 const mapDispatchToProps = {
   signOutCurrentUser,
+  fetchCurrentUser,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+)(Main);

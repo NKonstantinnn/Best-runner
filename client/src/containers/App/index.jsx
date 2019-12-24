@@ -9,7 +9,6 @@ import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
 import 'bootstrap-daterangepicker/daterangepicker.css';
 
 import configureStore from './Redux/configureStore';
-import Routes from './components/Routes';
 import Main from './containers/Main';
 import MainModal from '../../shared/modal/MainModal';
 
@@ -23,7 +22,6 @@ const App = () => (
     <Provider store={store}>
       <BrowserRouter>
         <Main>
-          <Routes />
           <MainModal />
           <Alert
             stack={{ limit: 5 }}
