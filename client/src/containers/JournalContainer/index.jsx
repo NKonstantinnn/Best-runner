@@ -8,14 +8,24 @@ import changeActiveTab from '../App/Redux/appActions';
 import Tab from '../../shared/types/Tab';
 import { PlusThickIcon } from '../../shared/styled/icons';
 import { showModal, hideModal } from '../../shared/modal/redux/actions';
+import { fetchTrainings } from './redux/actions';
 
 const JournalContainer = (props) => {
+  // set active tab
   useEffect(
     () => {
       props.changeActiveTab(Tab.JOURNAL);
-    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
     [],
   );
+  // fetch trainings
+  useEffect(
+    () => {
+      props.fetchTrainings();
+    },
+    [],
+  );
+
 
   const showActvityModal = () => {
     const modalProps = {
@@ -35,12 +45,14 @@ JournalContainer.propTypes = {
   changeActiveTab: PropTypes.func.isRequired,
   showModal: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
+  fetchTrainings: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
   changeActiveTab,
   showModal,
   hideModal,
+  fetchTrainings,
 };
 
 export default connect(null, mapDispatchToProps)(JournalContainer);

@@ -4,6 +4,7 @@ import exampleReducer from '../../ExampleContrainer/redux/reducer';
 import signUpReducer from '../../AuthContainer/redux/reducer';
 import currentUserReducer from './currentUserReducer';
 import appReducer from './appReducer';
+import journalReducer from '../../JournalContainer/redux/reducer';
 
 export default {
   app: appReducer,
@@ -12,4 +13,5 @@ export default {
   example: exampleReducer,
   signUp: signUpReducer,
   currentUser: currentUserReducer,
+  journal: journalReducer,
 };
