@@ -9,7 +9,7 @@ import changeActiveTab from '../App/Redux/appActions';
 import Tab from '../../shared/types/Tab';
 import { PlusThickIcon } from '../../shared/styled/icons';
 import { showModal, hideModal } from '../../shared/modal/redux/actions';
-import { fetchTrainings } from './redux/actions';
+import { fetchTrainings, addTraining } from './redux/actions';
 import { User } from '../../shared/prop-types';
 
 const JournalContainer = (props) => {
@@ -28,11 +28,17 @@ const JournalContainer = (props) => {
     [],
   );
 
+  const handleTrainingSubmit = (training) => {
+    props.addTraining(training);
+    props.hideModal();
+  };
+
   const showTrainingModal = (initData = { activity: 'RUNNING', distance: 10 }) => {
     const { user: { signUpDate } } = props;
     const modalProps = {
       handleCancel: props.hideModal,
       minDate: signUpDate,
+      onSubmit: handleTrainingSubmit,
     };
     props.showModal('TrainingModal', modalProps);
     props.reduxFormInitialize('TrainingForm', initData);
@@ -52,6 +58,7 @@ JournalContainer.propTypes = {
   fetchTrainings: PropTypes.func.isRequired,
   reduxFormInitialize: PropTypes.func.isRequired,
   user: User,
+  addTraining: PropTypes.func.isRequired,
 };
 
 JournalContainer.defaultProps = {
@@ -70,6 +77,7 @@ const mapDispatchToProps = {
   showModal,
   hideModal,
   fetchTrainings,
+  addTraining,
   reduxFormInitialize: initialize,
 };
 
