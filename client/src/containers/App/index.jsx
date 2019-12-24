@@ -6,6 +6,7 @@ import Alert from 'react-s-alert';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/bouncyflip.css';
+import 'bootstrap-daterangepicker/daterangepicker.css';
 
 import configureStore from './Redux/configureStore';
 import Routes from './components/Routes';

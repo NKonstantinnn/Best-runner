@@ -23,5 +23,6 @@
   },
   "author": "Aspirity",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/aspirity/aspiritywebtemplate#readme"
+  "homepage": "https://bitbucket.org/aspirity/aspiritywebtemplate#readme",
+  "dependencies": {}
 }

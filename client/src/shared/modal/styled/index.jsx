@@ -7,7 +7,7 @@ Modal.setAppElement('#root');
 
 export const defaultModalStyle = css => (css`
   position: absolute;
-  top: 100px;
+  top: 80px;
   left: 50%;
   right: auto;
   bottom: auto;
@@ -20,6 +20,7 @@ export const defaultOverlayStyle = css => (css`
   left: 0;
   right: 0;
   bottom: 0;
+  overflow: auto;
   background: rgb(0, 0, 0, 0.3);
 `);
 
