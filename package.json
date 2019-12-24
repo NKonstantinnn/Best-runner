@@ -11,12 +11,6 @@
     "test:all": "yarn --cwd ./server test:all --exit",
     "start": "docker-compose up"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn test",
-      "pre-push": "yarn test"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://Sergey_Okishev@bitbucket.org/aspirity/aspiritywebtemplate.git"
