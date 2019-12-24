@@ -2,10 +2,10 @@ import * as mongoose from 'mongoose'
 import {prop} from 'typegoose';
 
 enum ActivityType {
-    RUNNING = 'RUNNING',
-    BICYCLE = 'BICYCLE',
-    SKIING = 'SKIING',
-    WALKING = 'WALKING',
+    RUNNING = 'Running',
+    BICYCLE = 'Bicycle',
+    SKIING = 'Skiing',
+    WALKING = 'Walking',
 };
 
 export class Training {

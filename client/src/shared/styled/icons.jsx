@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { WhiteColor, BlackColor, InputTextColor } from './colors';
+import {
+  WhiteColor,
+  BlackColor,
+  InputTextColor,
+  PrimaryColor,
+  RedColor,
+} from './colors';
 
 const StyledIcon = styled.svg`
     width: 24px;
@@ -42,6 +48,26 @@ export const CaretIcon = () => (
       d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436
        0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787
         0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+    />
+  </StyledIcon>
+);
+
+export const PencilOutlineIcon = () => (
+  <StyledIcon viewBox="0 0 24 24">
+    <path
+      fill={PrimaryColor}
+      d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1
+       16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,
+       3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z"
+    />
+  </StyledIcon>
+);
+
+export const TrashCanIcon = () => (
+  <StyledIcon viewBox="0 0 24 24">
+    <path
+      fill={RedColor}
+      d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z"
     />
   </StyledIcon>
 );

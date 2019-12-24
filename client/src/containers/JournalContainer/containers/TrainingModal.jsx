@@ -18,7 +18,7 @@ const TrainingModal = (props) => {
   const { minDate, handleCancel, handleSubmit } = props;
 
   const activityOptions = Object.keys(ActivityTypes).map(type => ({
-    value: type, label: ActivityTypes[type],
+    value: ActivityTypes[type], label: ActivityTypes[type],
   }));
 
   return (

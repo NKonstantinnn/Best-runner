@@ -10,7 +10,8 @@ import Tab from '../../shared/types/Tab';
 import { PlusThickIcon } from '../../shared/styled/icons';
 import { showModal, hideModal } from '../../shared/modal/redux/actions';
 import { fetchTrainings, addTraining } from './redux/actions';
-import { User } from '../../shared/prop-types';
+import { User, Training } from '../../shared/prop-types';
+import TrainingTable from './components/TrainingTable';
 
 const JournalContainer = (props) => {
   // set active tab
@@ -46,7 +47,8 @@ const JournalContainer = (props) => {
 
   return (
     <JournalWrapper>
-      <Button color="success" onClick={() => showTrainingModal()}><PlusThickIcon /> Add training</Button>
+      <Button color="primary" size="lg" onClick={() => showTrainingModal()}><PlusThickIcon /> Add training</Button>
+      <TrainingTable trainings={props.trainings} />
     </JournalWrapper>
   );
 };
@@ -58,17 +60,21 @@ JournalContainer.propTypes = {
   fetchTrainings: PropTypes.func.isRequired,
   reduxFormInitialize: PropTypes.func.isRequired,
   user: User,
+  trainings: PropTypes.arrayOf(Training),
   addTraining: PropTypes.func.isRequired,
 };
 
 JournalContainer.defaultProps = {
   user: {},
+  trainings: [],
 };
 
-const mapStateToProps = ({ currentUser }) => {
+const mapStateToProps = ({ currentUser, journal }) => {
   const { user } = currentUser;
+  const { trainings } = journal;
   return {
     user,
+    trainings,
   };
 };
 

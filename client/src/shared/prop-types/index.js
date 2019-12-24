@@ -14,3 +14,11 @@ export const User = PropTypes.shape({
   signUpDate: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
 });
+
+export const Training = PropTypes.shape({
+  _id: PropTypes.string.isRequired,
+  activity: PropTypes.string.isRequired,
+  distance: PropTypes.number.isRequired,
+  date: PropTypes.string.isRequired,
+  comment: PropTypes.string,
+});
