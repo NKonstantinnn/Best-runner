@@ -8,3 +8,9 @@ export const OptionProp = PropTypes.shape({
 export const History = PropTypes.shape({
   push: PropTypes.func.isRequired,
 });
+
+export const User = PropTypes.shape({
+  _id: PropTypes.string.isRequired,
+  signUpDate: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+});

@@ -15,6 +15,8 @@ import {
 import ActivityTypes from '../../../shared/types/Activity';
 
 const TrainingModal = (props) => {
+  const { minDate, handleCancel } = props;
+
   const activityOptions = Object.keys(ActivityTypes).map(type => ({
     value: type, label: ActivityTypes[type],
   }));
@@ -24,11 +26,11 @@ const TrainingModal = (props) => {
       <TrainingModalTitle>Add training</TrainingModalTitle>
       <TrainingModalForm>
         <Field name="activity" component={Select} label="Activity" options={activityOptions} />
-        <Field name="date" component={DatePicker} label="Date" minDate="12/21/2019" singleDatePicker opens="right" />
+        <Field name="date" component={DatePicker} label="Date" minDate={minDate} singleDatePicker opens="right" />
         <Field name="distance" component={Slider} label="Distance" min={0} max={100} step={0.01} />
         <CustomField name="comment" id="comment" component={Input} label="Comment" type="textarea" />
         <TrainingModalFooter>
-          <Button outline color="primary" onClick={props.handleCancel}>Cancel</Button>
+          <Button outline color="primary" onClick={handleCancel}>Cancel</Button>
           <Button color="primary">Add</Button>
         </TrainingModalFooter>
       </TrainingModalForm>
@@ -38,6 +40,7 @@ const TrainingModal = (props) => {
 
 TrainingModal.propTypes = {
   handleCancel: PropTypes.func.isRequired,
+  minDate: PropTypes.string.isRequired,
 };
 
 export default reduxForm({

@@ -56,8 +56,8 @@ const CustomDatePicker = (props) => {
     <FormGroup>
       { label && <Label>{label}</Label> }
       <DateRangePicker
-        minDate={minDate}
-        maxDate={maxDate}
+        minDate={moment(minDate).format('MM-DD-YYY')}
+        maxDate={moment(maxDate).format('MM-DD-YYY')}
         startDate={singleDatePicker ? value : value.start}
         endDate={singleDatePicker ? value.start : value.end}
         singleDatePicker={singleDatePicker}

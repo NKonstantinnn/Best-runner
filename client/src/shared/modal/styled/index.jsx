@@ -19,6 +19,7 @@ export const defaultOverlayStyle = css => (css`
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1;
   bottom: 0;
   overflow: auto;
   background: rgb(0, 0, 0, 0.3);

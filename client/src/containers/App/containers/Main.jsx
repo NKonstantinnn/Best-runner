@@ -10,7 +10,7 @@ import Routes from '../components/Routes';
 import Header from '../components/Header';
 import Tab from '../../../shared/types/Tab';
 import { signOutCurrentUser, fetchCurrentUser } from '../Redux/currentUserActions';
-import { History } from '../../../shared/prop-types/index';
+import { History, User } from '../../../shared/prop-types/index';
 
 const RoutesWithSpinner = withSpinner(Routes);
 
@@ -53,9 +53,7 @@ Main.propTypes = {
   isAuth: PropTypes.bool.isRequired,
   activeTab: PropTypes.oneOf(Object.keys(Tab)).isRequired,
   signOutCurrentUser: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-  }),
+  user: User,
   isFetching: PropTypes.bool.isRequired,
   fetchCurrentUser: PropTypes.func.isRequired,
   history: History.isRequired,
