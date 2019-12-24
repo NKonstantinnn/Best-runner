@@ -12,6 +12,9 @@ import { showModal, hideModal } from '../../shared/modal/redux/actions';
 import { fetchTrainings, addTraining, editTraining, deleteTraining } from './redux/actions';
 import { User, Training } from '../../shared/prop-types';
 import TrainingTable from './components/TrainingTable';
+import withSpinner from '../../shared/hocs/withSpinner';
+
+const TrainingTableWithSpinner = withSpinner(TrainingTable);
 
 const JournalContainer = (props) => {
   // set active tab
@@ -53,10 +56,11 @@ const JournalContainer = (props) => {
   return (
     <JournalWrapper>
       <Button color="primary" size="lg" onClick={() => showTrainingModal(false)}><PlusThickIcon /> Add training</Button>
-      <TrainingTable
+      <TrainingTableWithSpinner
         trainings={props.trainings}
         handleEdit={training => showTrainingModal(true, training)}
         handleDelete={id => props.deleteTraining(id)}
+        isFetching={props.isFetching}
       />
     </JournalWrapper>
   );
@@ -73,6 +77,7 @@ JournalContainer.propTypes = {
   addTraining: PropTypes.func.isRequired,
   deleteTraining: PropTypes.func.isRequired,
   editTraining: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
 
 JournalContainer.defaultProps = {
@@ -82,10 +87,11 @@ JournalContainer.defaultProps = {
 
 const mapStateToProps = ({ currentUser, journal }) => {
   const { user } = currentUser;
-  const { trainings } = journal;
+  const { trainings, isFetching } = journal;
   return {
     user,
     trainings,
+    isFetching,
   };
 };
 
