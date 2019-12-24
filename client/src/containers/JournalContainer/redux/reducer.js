@@ -6,6 +6,12 @@ import {
   addTrainingRequest,
   addTrainingSuccess,
   addTrainingFailure,
+  editTrainingRequest,
+  editTrainingSuccess,
+  editTrainingFailure,
+  deleteTrainingRequest,
+  deleteTrainingSuccess,
+  deleteTrainingFailure,
 } from './actions';
 
 const transformTrainings = (trainings, training) => {
@@ -22,10 +28,22 @@ const transformTrainings = (trainings, training) => {
   return [...trainings, training]; // add
 };
 
+const deleteTraining = (trainings, trainingId) => {
+  /* eslint-disable no-underscore-dangle */
+  const idx = trainings.findIndex(el => el._id === trainingId);
+  /* eslint-enable */
+  return [...trainings.slice(0, idx), ...trainings.slice(idx + 1)];
+};
+
 const errorActionHandler = (state, { payload }) => ({
   ...state,
   error: payload,
   isFetching: false,
+});
+
+const requestActionHanler = state => ({
+  ...state,
+  isFetching: true,
 });
 
 
@@ -36,10 +54,7 @@ const defaultState = {
 };
 
 export default handleActions({
-  [fetchTrainingsRequest]: state => ({
-    ...state,
-    isFetching: true,
-  }),
+  [fetchTrainingsRequest]: requestActionHanler,
   [fetchTrainingsSuccess]: (state, { payload }) => ({
     ...state,
     isFetching: false,
@@ -47,10 +62,7 @@ export default handleActions({
     trainings: payload,
   }),
   [fetchTrainingsFailure]: errorActionHandler,
-  [addTrainingRequest]: state => ({
-    ...state,
-    isFetching: true,
-  }),
+  [addTrainingRequest]: requestActionHanler,
   [addTrainingSuccess]: (state, { payload }) => ({
     ...state,
     isFetching: false,
@@ -58,4 +70,20 @@ export default handleActions({
     trainings: transformTrainings(state.trainings, payload),
   }),
   [addTrainingFailure]: errorActionHandler,
+  [editTrainingRequest]: requestActionHanler,
+  [editTrainingSuccess]: (state, { payload }) => ({
+    ...state,
+    isFetching: false,
+    error: null,
+    trainings: transformTrainings(state.trainings, payload),
+  }),
+  [editTrainingFailure]: errorActionHandler,
+  [deleteTrainingRequest]: requestActionHanler,
+  [deleteTrainingSuccess]: (state, { payload }) => ({
+    ...state,
+    isFetching: false,
+    error: null,
+    trainings: deleteTraining(state.trainings, payload),
+  }),
+  [deleteTrainingFailure]: errorActionHandler,
 }, defaultState);

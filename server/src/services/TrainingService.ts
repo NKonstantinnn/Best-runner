@@ -20,6 +20,29 @@ class TrainingService {
 
         return dbUser ? dbUser.trainings : null;
     }
+
+    public static async updateTraining(userId: mongoose.Types.ObjectId, training: Training): Promise<Training> {
+      const { activity, date, distance, comment } = training;
+      await UserModel.updateOne(
+        { _id: userId, 'trainings._id': training._id },
+        { $set: { 
+            'trainings.$.activity': activity,
+            'trainings.$.date': date,
+            'trainings.$.distance': distance,
+            'trainings.$.comment': comment 
+          } 
+        },
+      );
+      return training;
+    }
+
+    public static async deleteTraining(userId: mongoose.Types.ObjectId, trainingId): Promise<mongoose.Types.ObjectId> {
+      await UserModel.update(
+        { _id: userId },
+        { $pull: {'trainings': { _id: trainingId } } }
+      );
+      return trainingId;
+    }
 }
   
 export default TrainingService;

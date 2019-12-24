@@ -9,7 +9,7 @@ import changeActiveTab from '../App/Redux/appActions';
 import Tab from '../../shared/types/Tab';
 import { PlusThickIcon } from '../../shared/styled/icons';
 import { showModal, hideModal } from '../../shared/modal/redux/actions';
-import { fetchTrainings, addTraining } from './redux/actions';
+import { fetchTrainings, addTraining, editTraining, deleteTraining } from './redux/actions';
 import { User, Training } from '../../shared/prop-types';
 import TrainingTable from './components/TrainingTable';
 
@@ -29,17 +29,22 @@ const JournalContainer = (props) => {
     [],
   );
 
-  const handleTrainingSubmit = (training) => {
-    props.addTraining(training);
+  const createTrainingSubmitHandler = isEdit => (training) => {
+    if (isEdit) {
+      props.editTraining(training);
+    } else {
+      props.addTraining(training);
+    }
     props.hideModal();
   };
 
-  const showTrainingModal = (initData = { activity: 'RUNNING', distance: 10 }) => {
+  const showTrainingModal = (isEdit, initData = { activity: 'Running', distance: 10 }) => {
     const { user: { signUpDate } } = props;
     const modalProps = {
       handleCancel: props.hideModal,
       minDate: signUpDate,
-      onSubmit: handleTrainingSubmit,
+      isEdit,
+      onSubmit: createTrainingSubmitHandler(isEdit),
     };
     props.showModal('TrainingModal', modalProps);
     props.reduxFormInitialize('TrainingForm', initData);
@@ -47,8 +52,12 @@ const JournalContainer = (props) => {
 
   return (
     <JournalWrapper>
-      <Button color="primary" size="lg" onClick={() => showTrainingModal()}><PlusThickIcon /> Add training</Button>
-      <TrainingTable trainings={props.trainings} />
+      <Button color="primary" size="lg" onClick={() => showTrainingModal(false)}><PlusThickIcon /> Add training</Button>
+      <TrainingTable
+        trainings={props.trainings}
+        handleEdit={training => showTrainingModal(true, training)}
+        handleDelete={id => props.deleteTraining(id)}
+      />
     </JournalWrapper>
   );
 };
@@ -62,6 +71,8 @@ JournalContainer.propTypes = {
   user: User,
   trainings: PropTypes.arrayOf(Training),
   addTraining: PropTypes.func.isRequired,
+  deleteTraining: PropTypes.func.isRequired,
+  editTraining: PropTypes.func.isRequired,
 };
 
 JournalContainer.defaultProps = {
@@ -84,6 +95,8 @@ const mapDispatchToProps = {
   hideModal,
   fetchTrainings,
   addTraining,
+  deleteTraining,
+  editTraining,
   reduxFormInitialize: initialize,
 };
 

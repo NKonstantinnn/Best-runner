@@ -15,15 +15,19 @@ import {
 import ActivityTypes from '../../../shared/types/Activity';
 
 const TrainingModal = (props) => {
-  const { minDate, handleCancel, handleSubmit } = props;
+  const {
+    minDate, isEdit, handleCancel, handleSubmit,
+  } = props;
 
   const activityOptions = Object.keys(ActivityTypes).map(type => ({
     value: ActivityTypes[type], label: ActivityTypes[type],
   }));
 
+  const actionName = isEdit ? 'Edit' : 'Add';
+
   return (
     <TrainingModalContent>
-      <TrainingModalTitle>Add training</TrainingModalTitle>
+      <TrainingModalTitle>{actionName} training</TrainingModalTitle>
       <TrainingModalForm onSubmit={handleSubmit}>
         <Field name="activity" component={Select} label="Activity" options={activityOptions} />
         <Field name="date" component={DatePicker} label="Date" minDate={minDate} singleDatePicker opens="right" />
@@ -31,7 +35,7 @@ const TrainingModal = (props) => {
         <CustomField name="comment" id="comment" component={Input} label="Comment" type="textarea" />
         <TrainingModalFooter>
           <Button outline color="primary" onClick={handleCancel}>Cancel</Button>
-          <Button type="submit" color="primary">Add</Button>
+          <Button type="submit" color="primary">{actionName}</Button>
         </TrainingModalFooter>
       </TrainingModalForm>
     </TrainingModalContent>
@@ -42,6 +46,7 @@ TrainingModal.propTypes = {
   handleCancel: PropTypes.func.isRequired,
   minDate: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  isEdit: PropTypes.bool.isRequired,
 };
 
 export default reduxForm({

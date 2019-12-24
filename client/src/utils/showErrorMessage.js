@@ -10,7 +10,6 @@ const showErrorMessage = (error) => {
   }
   if (res.data.errors) {
     const { errors } = res.data;
-    console.log(errors);
     return Object.keys(errors).forEach(field => Alert.error(errors[field].msg));
   }
   return Alert.error('Unknown error on server');
