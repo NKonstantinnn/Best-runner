@@ -36,7 +36,7 @@ class TrainingController extends BaseController {
   public async updateTraining(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
     try {
       const { user } = req;
-      const updetedTraining = await TrainingService.addTraining(user._id, req.body);
+      const updetedTraining = await TrainingService.updateTraining(user._id, req.body);
       return res.json(updetedTraining)
     } catch (err) {
       return next(err instanceof Error ? err : new VError(err));
