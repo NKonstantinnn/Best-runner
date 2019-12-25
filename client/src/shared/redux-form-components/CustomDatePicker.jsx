@@ -28,11 +28,11 @@ const CustomDatePicker = (props) => {
   };
 
   useEffect(
-    () => {
-      if (!value) setValue(new Date(), new Date());
-    },
+    () => { if (!value) setValue(new Date(), new Date()); },
     [],
   );
+
+  const normDate = (date, formatDate = 'MM-DD-YYYY') => moment(date).format(formatDate);
 
   const handleApply = (event, picker) => {
     const {
@@ -44,11 +44,11 @@ const CustomDatePicker = (props) => {
 
   const formatValue = (pickerValue) => {
     if (singleDatePicker) {
-      return moment(pickerValue).format(format);
+      return normDate(pickerValue, format);
     }
 
-    const formatedStart = moment(pickerValue.start).format(format);
-    const formatedEnd = moment(pickerValue.end).format(format);
+    const formatedStart = normDate(pickerValue.start, format);
+    const formatedEnd = normDate(pickerValue.end, format);
     return `${formatedStart} - ${formatedEnd}`;
   };
 
@@ -56,10 +56,10 @@ const CustomDatePicker = (props) => {
     <FormGroup>
       { label && <Label>{label}</Label> }
       <DateRangePicker
-        minDate={moment(minDate).format('MM-DD-YYY')}
-        maxDate={moment(maxDate).format('MM-DD-YYY')}
-        startDate={singleDatePicker ? value : value.start}
-        endDate={singleDatePicker ? value.start : value.end}
+        minDate={minDate && normDate(minDate)}
+        maxDate={maxDate && normDate(maxDate)}
+        startDate={singleDatePicker ? normDate(value) : normDate(value.start)}
+        endDate={singleDatePicker ? normDate(value.start) : normDate(value.end)}
         singleDatePicker={singleDatePicker}
         onApply={handleApply}
         containerStyles={{ width: '100%', display: 'block' }}
@@ -74,7 +74,7 @@ const CustomDatePicker = (props) => {
 CustomDatePicker.propTypes = {
   input: PropTypes.shape({ onChange: PropTypes.func }).isRequired,
   label: PropTypes.string,
-  minDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]).isRequired,
+  minDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
   maxDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
   singleDatePicker: PropTypes.bool,
   format: PropTypes.string,
@@ -82,7 +82,8 @@ CustomDatePicker.propTypes = {
 
 CustomDatePicker.defaultProps = {
   label: null,
-  maxDate: new Date(),
+  maxDate: null,
+  minDate: null,
   singleDatePicker: false,
   format: 'DD-MM-YYYY',
 };

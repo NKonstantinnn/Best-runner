@@ -9,7 +9,7 @@ const StyledMenu = styled.div`
   }
 `;
 
-export const Menu = ({ children, ...other }) => (
+const Menu = ({ children, ...other }) => (
   <StyledMenu>
     <components.Menu {...other}>
       {children}
@@ -25,6 +25,11 @@ const StyledIndicatorSeparator = styled.span`
   display: none;
 `;
 
-export const IndicatorSeparator = () => (
+const IndicatorSeparator = () => (
   <StyledIndicatorSeparator />
 );
+
+export default {
+  Menu,
+  IndicatorSeparator,
+};

@@ -13,6 +13,7 @@ import { fetchTrainings, addTraining, editTraining, deleteTraining } from './red
 import { User, Training } from '../../shared/prop-types';
 import TrainingTable from './components/TrainingTable';
 import withSpinner from '../../shared/hocs/withSpinner';
+import FilterPanelForm from './containers/FilterPanelForm';
 
 const TrainingTableWithSpinner = withSpinner(TrainingTable);
 
@@ -22,7 +23,7 @@ const JournalContainer = (props) => {
     () => {
       props.changeActiveTab(Tab.JOURNAL);
     },
-    [props.user],
+    [],
   );
   // fetch trainings
   useEffect(
@@ -56,6 +57,7 @@ const JournalContainer = (props) => {
   return (
     <JournalWrapper>
       <Button color="primary" size="lg" onClick={() => showTrainingModal(false)}><PlusThickIcon /> Add training</Button>
+      <FilterPanelForm minDate={props.user && props.user.signUpDate} />
       <TrainingTableWithSpinner
         trainings={props.trainings}
         handleEdit={training => showTrainingModal(true, training)}

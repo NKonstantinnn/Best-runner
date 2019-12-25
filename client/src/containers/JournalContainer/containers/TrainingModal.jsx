@@ -12,16 +12,12 @@ import {
   TrainingModalForm,
   TrainingModalFooter,
 } from './styled/TrainingModal';
-import ActivityTypes from '../../../shared/types/Activity';
+import ActivityOptions from '../../../shared/select-options/Activity';
 
 const TrainingModal = (props) => {
   const {
     minDate, isEdit, handleCancel, handleSubmit,
   } = props;
-
-  const activityOptions = Object.keys(ActivityTypes).map(type => ({
-    value: ActivityTypes[type], label: ActivityTypes[type],
-  }));
 
   const actionName = isEdit ? 'Edit' : 'Add';
 
@@ -29,8 +25,16 @@ const TrainingModal = (props) => {
     <TrainingModalContent>
       <TrainingModalTitle>{actionName} training</TrainingModalTitle>
       <TrainingModalForm onSubmit={handleSubmit}>
-        <Field name="activity" component={Select} label="Activity" options={activityOptions} />
-        <Field name="date" component={DatePicker} label="Date" minDate={minDate} singleDatePicker opens="right" />
+        <Field name="activity" component={Select} label="Activity" options={ActivityOptions} />
+        <Field
+          name="date"
+          component={DatePicker}
+          label="Date"
+          minDate={minDate}
+          maxDate={new Date()}
+          singleDatePicker
+          opens="right"
+        />
         <Field name="distance" component={Slider} label="Distance" min={0} max={100} step={0.01} />
         <CustomField name="comment" id="comment" component={Input} label="Comment" type="textarea" />
         <TrainingModalFooter>

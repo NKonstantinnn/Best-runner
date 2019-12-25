@@ -71,3 +71,21 @@ export const TrashCanIcon = () => (
     />
   </StyledIcon>
 );
+
+export const ArrowUpThickIcon = () => (
+  <StyledIcon viewBox="0 0 24 24">
+    <path
+      fill={InputTextColor}
+      d="M14,20H10V11L6.5,14.5L4.08,12.08L12,4.16L19.92,12.08L17.5,14.5L14,11V20Z"
+    />
+  </StyledIcon>
+);
+
+export const ArrowDownThickIcon = () => (
+  <StyledIcon viewBox="0 0 24 24">
+    <path
+      fill={InputTextColor}
+      d="M10,4H14V13L17.5,9.5L19.92,11.92L12,19.84L4.08,11.92L6.5,9.5L10,13V4Z"
+    />
+  </StyledIcon>
+);
