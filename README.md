@@ -35,11 +35,11 @@ Launch application
 
 To start the application you need to open a terminal in the project root directory and run the command:
 
-  $ yarn install:all
+    $ yarn install:all
 
-This command install packages both for server and client
+This command install packages both for server and client.
 Next to execute command bellow to run docker-compose and dependencies watcher:
 
-  $ yarn start
+    $ yarn start
 
 Finally, you can open a browser on the URL `localhost: 3000`
