@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Card, Form, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
+
 import { PrimaryColor } from '../../../../shared/styled/colors';
 
 export const AuthFormWrapper = styled(Card)`

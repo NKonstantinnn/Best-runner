@@ -4,12 +4,14 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { SubmissionError } from 'redux-form';
+
 import AuthForm from './containers/AuthForm';
 import { fetchAuth } from './redux/actions';
 import AuthWrapper from './styled';
+import { History } from '../../shared/prop-types';
 
 const SignUpContainer = (props) => {
-  const validateSignUpForm = (user) => {
+  const validateAuthForm = (user) => {
     const { username, password } = user;
     const passwordRegEx = /(?=.*[0-9])(?=.*[а-яёa-z])(?=.*[A-ZА-ЯЁ])[0-9a-zA-Z.,';\][{}:"<>?!@#$%^&*()_\-+=|/№А-Яа-яЁё]{6,}/;
     const usernameRegExp = /^[^._ ](?:[\w-]|[\w-])+[^._ ]$/;
@@ -37,7 +39,7 @@ const SignUpContainer = (props) => {
   };
 
   const handleAuth = (user) => {
-    validateSignUpForm(user);
+    validateAuthForm(user);
     const { isSignUp, history } = props;
     props.fetchAuth(user, isSignUp, history);
   };
@@ -52,9 +54,7 @@ const SignUpContainer = (props) => {
 SignUpContainer.propTypes = {
   isSignUp: PropTypes.bool.isRequired,
   fetchAuth: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
+  history: History.isRequired,
 };
 
 const mapDispatchToProps = {

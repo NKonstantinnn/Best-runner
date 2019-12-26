@@ -21,7 +21,7 @@ const AuthForm = ({ isSignUp, handleSubmit }) => (
     <AuthFormTitle>BestRunner</AuthFormTitle>
     <AuthFormTypeText>{isSignUp ? 'Sign up' : 'Sign in'}</AuthFormTypeText>
     <StyledAuthForm onSubmit={handleSubmit}>
-      <Field id="username" name="username" type="text" component={Input} label="Login" />
+      <Field id="username" name="username" type="text" component={Input} label="Username" />
       <Field id="password" name="password" type="password" component={Input} label="Password" />
       {isSignUp && <Field id="captcha" name="captcha" component={Captcha} label="Captcha" />}
       <AuthFormLink to={isSignUp ? '/signin' : '/signup'}>

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { WhiteColor, PrimaryColor, GrayColor } from '../../../../shared/styled/colors';
 import HeaderHeight from '../../../../shared/styled/variables';
 
@@ -99,4 +100,3 @@ export const HeaderProfileUsername = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-

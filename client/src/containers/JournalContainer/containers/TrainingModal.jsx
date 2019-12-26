@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { Button, Input } from 'reactstrap';
+
 import Select from '../../../shared/redux-form-components/CustomSelect';
 import DatePicker from '../../../shared/redux-form-components/CustomDatePicker';
 import Slider from '../../../shared/redux-form-components/CustomSlider';
@@ -48,7 +49,7 @@ const TrainingModal = (props) => {
 
 TrainingModal.propTypes = {
   handleCancel: PropTypes.func.isRequired,
-  minDate: PropTypes.string.isRequired,
+  minDate: PropTypes.instanceOf(Date).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   isEdit: PropTypes.bool.isRequired,
 };

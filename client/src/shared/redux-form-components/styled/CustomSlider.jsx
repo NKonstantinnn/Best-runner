@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import ReactSlider from 'react-slider';
 import { Input } from 'reactstrap';
+
 import { WhiteColor, PrimaryColor, GrayColor } from '../../styled/colors';
 
 const StyledSlider = styled(ReactSlider)`

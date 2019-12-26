@@ -11,7 +11,7 @@ const ChartsContainer = (props) => {
   useEffect(
     () => {
       props.changeActiveTab(Tab.CHARTS);
-    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
     [],
   );
   return (

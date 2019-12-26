@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { FormGroup, Label } from 'reactstrap';
 import PropTypes from 'prop-types';
+
 import StyledSlider, { StyledTrack, StyledThumb, SliderWrapper, SliderInput } from './styled/CustomSlider';
 
 const Thumb = props => <StyledThumb {...props} />;

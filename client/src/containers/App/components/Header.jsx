@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import {
   StyledHeader,
   HeaderContent,
@@ -15,6 +16,7 @@ import {
   HeaderProfileUsername,
 } from './styled/Header';
 import Tab from '../../../shared/types/Tab';
+import { History } from '../../../shared/prop-types';
 
 const Header = ({
   activeTab,
@@ -52,9 +54,7 @@ const Header = ({
 
 Header.propTypes = {
   activeTab: PropTypes.oneOf(Object.keys(Tab)).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
+  history: History.isRequired,
   handleSignOut: PropTypes.func.isRequired,
   user: PropTypes.shape({
     username: PropTypes.string.isRequired,

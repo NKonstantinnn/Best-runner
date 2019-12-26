@@ -41,7 +41,7 @@ const TrainingTable = (props) => {
 
   return (
     <TrainingTableWrapper>
-      { isEmpty && <NoTrainingsMsg>You have no trainings yet</NoTrainingsMsg> }
+      { isEmpty && <NoTrainingsMsg>You have no trainings</NoTrainingsMsg> }
       {
         !isEmpty &&
         <Table>

@@ -75,8 +75,7 @@ class JWTAuth extends Passport {
       jwtStrategyOpts,
       async (jwtPayload: any, done: PassportStrategyDone) => {
         const user = await UserModel
-          .findOne({ _id: jwtPayload.userId }, { password: false })
-          .select({ trainings: false })
+          .findOne({ _id: jwtPayload.userId }, { password: false, trainings: false })
           .lean();
 
         if (!user) {

@@ -1,4 +1,5 @@
 import * as jwt from 'jsonwebtoken';
+
 import { User } from '../models/UserModel';
 import config from '../config';
 

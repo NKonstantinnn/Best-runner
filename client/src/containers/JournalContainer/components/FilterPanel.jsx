@@ -15,7 +15,6 @@ import SlyledFilterPanel, {
   DatePickerInput,
 } from './styled/FilterPanel';
 
-
 const FilterPanel = (props) => {
   const {
     minDate, dateRange, handleActivitiesSelect, handleDateRangeApply, handleSortBySelect,
@@ -38,6 +37,8 @@ const FilterPanel = (props) => {
         startDate={moment(dateRange.start)}
         endDate={moment(dateRange.end)}
         locale={{ format: 'DD-MM-YYYY' }}
+        cancelClass="btn btn-outline-primary"
+        applyClass="btn btn-primary"
         onApply={handleDateRangeApply}
       >
         <DatePickerInput>

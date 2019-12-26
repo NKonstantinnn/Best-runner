@@ -82,11 +82,11 @@ const JournalContainer = (props) => {
   const filterByActivities = trainings => trainings.filter(t => filteredActivities.includes(t.activity));
 
   const filterByDateRange = (trainings) => {
-    const sMoment = moment(dateRange.start).startOf('day');
-    const eMoment = moment(dateRange.end).startOf('day');
+    const startMoment = moment(dateRange.start).startOf('day');
+    const endMoment = moment(dateRange.end).startOf('day');
     return trainings.filter((t) => {
       const tMoment = moment(t.date).startOf('day');
-      return (sMoment.diff(tMoment, 'days') <= 0 && eMoment.diff(tMoment, 'days') >= 0);
+      return (startMoment.diff(tMoment, 'days') <= 0 && endMoment.diff(tMoment, 'days') >= 0);
     });
   };
 
@@ -95,48 +95,36 @@ const JournalContainer = (props) => {
     switch (sortBy) {
       case 'DateUp': {
         compareFunc = (t1, t2) => {
-          const t1m = moment(t1.date).startOf('day');
-          const t2m = moment(t2.date).startOf('day');
-          if (t1m.diff(t2m, 'seconds' < 0)) {
-            return -1;
-          } else if (t1m.diff(t2m, 'seconds' > 0)) {
-            return 1;
-          }
+          const t1m = moment(t1.date);
+          const t2m = moment(t2.date);
+          if (t1m.diff(t2m, 'seconds') < 0) return -1;
+          else if (t1m.diff(t2m, 'seconds') > 0) return 1;
           return 0;
         };
         break;
       }
       case 'DateDown': {
         compareFunc = (t1, t2) => {
-          const t1m = moment(t1.date).startOf('day');
-          const t2m = moment(t2.date).startOf('day');
-          if (t1m.diff(t2m, 'seconds' < 0)) {
-            return 1;
-          } else if (t1m.diff(t2m, 'seconds' > 0)) {
-            return -1;
-          }
+          const t1m = moment(t1.date);
+          const t2m = moment(t2.date);
+          if (t1m.diff(t2m, 'seconds') < 0) return 1;
+          else if (t1m.diff(t2m, 'seconds') > 0) return -1;
           return 0;
         };
         break;
       }
       case 'DistanceUp': {
         compareFunc = (t1, t2) => {
-          if (t1.distance < t2.distance) {
-            return -1;
-          } else if (t1.distance > t2.distance) {
-            return 1;
-          }
+          if (t1.distance < t2.distance) return -1;
+          else if (t1.distance > t2.distance) return 1;
           return 0;
         };
         break;
       }
       case 'DistanceDown': {
         compareFunc = (t1, t2) => {
-          if (t1.distance < t2.distance) {
-            return 1;
-          } else if (t1.distance > t2.distance) {
-            return -1;
-          }
+          if (t1.distance < t2.distance) return 1;
+          else if (t1.distance > t2.distance) return -1;
           return 0;
         };
         break;
