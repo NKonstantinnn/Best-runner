@@ -1,8 +1,11 @@
 import { Handler } from 'express';
 import * as expressValidator from 'express-validator';
 import axios from 'axios';
+import * as mongoose from 'mongoose';
+
 import UserModel from '../models/UserModel';
 import config from '../config';
+import { ActivityType } from '../models/TrainingModel';
 
 const isNotEmpty = (value: any[]): boolean => {
   if (!value) { return false; }
@@ -55,6 +58,20 @@ const isCaptchaVerified = async (captchaResponse: string, userIP: string): Promi
   return success ? Promise.resolve() : Promise.reject('Captcha is not verified');
 };
 
+const isActivityType = (activity: string): boolean => ActivityType[activity.toUpperCase()] ? true : false;
+
+const isDate = (date: string): boolean => new Date(date).toString() !== 'Invalid Date';
+
+const isMoreSignUpDate = (date: string, signUpDate: string): boolean => new Date(date).getTime() > new Date(signUpDate).getTime();
+
+const isNotMoreCurrentDate = (date: string): boolean => new Date(date).getTime() <= Date.now();
+
+const isNumber = (value: any):boolean => !isNaN(parseFloat(value));
+
+const isPositiveNumber = (value: number): boolean => value > 0;
+
+const isMongoId = (id: string): boolean => mongoose.Types.ObjectId.isValid(id);
+
 export default (): Handler => (
   expressValidator({
     customValidators: {
@@ -64,6 +81,13 @@ export default (): Handler => (
       isPassword,
       isUserNotExistsByUsername,
       isCaptchaVerified,
+      isActivityType,
+      isDate,
+      isMoreSignUpDate,
+      isNotMoreCurrentDate,
+      isNumber,
+      isPositiveNumber,
+      isMongoId,
     },
   })
 );

@@ -3,13 +3,30 @@ import passport from '../../middlewares/Passport';
 import * as VError from 'verror';
 import BaseController from '../BaseController';
 import { TrainingService } from '../../services';
+import validate from '../../middlewares/validate';
+import { addTrainingSchema, editTrainingSchema, deleteTrainingSchema } from '../../validationSchemas/trainingSchema';
 
 class TrainingController extends BaseController {
   public init(): void {
-    this.router.post('/create', passport.authenticate('jwt', { session: false }), this.addTraining);
+    this.router.post(
+      '/create',
+      passport.authenticate('jwt',{ session: false }), 
+      validate(addTrainingSchema),
+      this.addTraining
+    );
+    this.router.put(
+      '/',
+      passport.authenticate('jwt', { session: false }),
+      validate(editTrainingSchema),
+      this.updateTraining
+    );
+    this.router.delete(
+      '/:id',
+      passport.authenticate('jwt', { session: false }),
+      validate(deleteTrainingSchema),
+      this.deleteTraining
+    );
     this.router.get('/list', passport.authenticate('jwt', { session: false }), this.getTrainings);
-    this.router.put('/', passport.authenticate('jwt', { session: false }), this.updateTraining);
-    this.router.delete('/:id', passport.authenticate('jwt', { session: false }), this.deleteTraining);
   }
 
   public async addTraining(req: Request, res: Response, next: NextFunction): Promise<Response | void> {

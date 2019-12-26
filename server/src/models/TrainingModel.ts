@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose'
 import {prop} from 'typegoose';
 
-enum ActivityType {
+export enum ActivityType {
     RUNNING = 'Running',
     BICYCLE = 'Bicycle',
     SKIING = 'Skiing',

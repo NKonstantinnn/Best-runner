@@ -5,15 +5,15 @@ import passport from '../../middlewares/Passport';
 import UserModel, { User } from '../../models/UserModel';
 import { AuthService } from '../../services';
 import validate from '../../middlewares/validate';
-import { signUpSchema, signInSchema } from '../../validationSchemas/auth';
+import { signUpSchema, signInSchema } from '../../validationSchemas/authSchema';
 import BaseController from '../BaseController';
 
 class AuthController extends BaseController {
   public init(): void {
     this.router.post(
       '/signin',
-      validate(signInSchema),
       passport.authenticate('local', { failWithError: true }),
+      validate(signInSchema),
       this.signIn,
       this.signInError,
     );

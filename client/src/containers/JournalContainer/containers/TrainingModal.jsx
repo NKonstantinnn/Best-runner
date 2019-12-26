@@ -36,7 +36,7 @@ const TrainingModal = (props) => {
           singleDatePicker
           opens="right"
         />
-        <Field name="distance" component={Slider} label="Distance" min={0} max={100} step={0.01} />
+        <Field name="distance" component={Slider} label="Distance" min={0.01} max={100} step={0.01} />
         <CustomField name="comment" id="comment" component={Input} label="Comment" type="textarea" />
         <TrainingModalFooter>
           <Button outline color="primary" onClick={handleCancel}>Cancel</Button>
