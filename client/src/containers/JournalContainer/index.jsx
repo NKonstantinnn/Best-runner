@@ -42,7 +42,7 @@ const JournalContainer = (props) => {
 
   const [filteredActivities, setFilteredActivities] = useState(ActivityOptions.map(op => op.value));
   const [dateRange, setDateRange] = useState({ startDate: moment(signUpDate), endDate: moment() });
-  const [sortBy, setSortBy] = useState(SortTrainingOptions[0]);
+  const [sortBy, setSortBy] = useState(SortTrainingOptions[0].value);
 
   const createTrainingSubmitHandler = isEdit => (training) => {
     if (isEdit) {
@@ -65,15 +65,14 @@ const JournalContainer = (props) => {
   };
 
   const handleActivitiesSelect = (selectedOptions) => {
-    const newValue = selectedOptions.map(op => op.value);
-    setFilteredActivities(newValue);
+    setFilteredActivities(selectedOptions);
   };
 
   const handleDateRangeApply = (datePicker) => {
     setDateRange(datePicker);
   };
 
-  const handleSortBySelect = selectedOption => setSortBy(selectedOption.value);
+  const handleSortBySelect = selectedOption => setSortBy(selectedOption);
 
   const filterByActivities = trainings => trainings.filter(t => filteredActivities.includes(t.activity));
 
@@ -138,8 +137,10 @@ const JournalContainer = (props) => {
       <Button color="primary" size="lg" onClick={() => showTrainingModal(false)}><PlusThickIcon /> Add training</Button>
       <FilterPanel
         minDate={moment(signUpDate)}
-        handleActivitiesSelect={handleActivitiesSelect}
         dateRange={dateRange}
+        sortBy={sortBy}
+        filteredActivities={filteredActivities}
+        handleActivitiesSelect={handleActivitiesSelect}
         handleDateRangeApply={handleDateRangeApply}
         handleSortBySelect={handleSortBySelect}
       />

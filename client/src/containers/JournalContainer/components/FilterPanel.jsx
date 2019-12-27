@@ -1,34 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
 import moment, { Moment } from 'moment';
 
 import DatePicker from '../../../shared/components/CustomDatePicker';
+import Select from '../../../shared/components/CustomSelect';
 import ActivityOptions from '../../../shared/select-options/Activity';
 import SortTrainingOptions from '../../../shared/select-options/SortTraining';
 import { RangeDatePickerValue } from '../../../shared/prop-types';
-import SlyledFilterPanel, {
-  Option,
-  SingleValue,
-  Menu,
-  IndicatorSeparator,
-} from './styled/FilterPanel';
+import SlyledFilterPanel, { Option, SingleValue } from './styled/FilterPanel';
 
 const FilterPanel = (props) => {
   const {
-    minDate, dateRange, handleActivitiesSelect, handleDateRangeApply, handleSortBySelect,
+    minDate, dateRange, filteredActivities, sortBy,
+    handleActivitiesSelect, handleDateRangeApply, handleSortBySelect,
   } = props;
 
   return (
     <SlyledFilterPanel>
       <Select
         options={ActivityOptions}
-        defaultValue={ActivityOptions}
+        value={filteredActivities}
         isMulti
-        isSearchable={false}
-        isClearable={false}
         onChange={handleActivitiesSelect}
-        components={{ Menu, IndicatorSeparator }}
       />
       <DatePicker
         minDate={minDate}
@@ -40,13 +33,9 @@ const FilterPanel = (props) => {
       />
       <Select
         options={SortTrainingOptions}
-        defaultValue={SortTrainingOptions[0]}
-        isSearchable={false}
-        isClearable={false}
+        value={sortBy}
         onChange={handleSortBySelect}
-        components={{
-          Menu, IndicatorSeparator, Option, SingleValue,
-        }}
+        components={{ Option, SingleValue }}
       />
     </SlyledFilterPanel>
   );
@@ -54,10 +43,12 @@ const FilterPanel = (props) => {
 
 FilterPanel.propTypes = {
   minDate: PropTypes.instanceOf(Moment),
+  filteredActivities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  dateRange: RangeDatePickerValue.isRequired,
+  sortBy: PropTypes.string.isRequired,
   handleActivitiesSelect: PropTypes.func.isRequired,
   handleDateRangeApply: PropTypes.func.isRequired,
   handleSortBySelect: PropTypes.func.isRequired,
-  dateRange: RangeDatePickerValue.isRequired,
 };
 
 FilterPanel.defaultProps = {
