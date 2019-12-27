@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Moment } from 'moment';
 
 export const OptionProp = PropTypes.shape({
   value: PropTypes.string.isRequired,
@@ -21,4 +22,9 @@ export const Training = PropTypes.shape({
   distance: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
   comment: PropTypes.string,
+});
+
+export const RangeDatePickerValue = PropTypes.shape({
+  startDate: PropTypes.instanceOf(Moment),
+  endDate: PropTypes.instanceOf(Moment),
 });

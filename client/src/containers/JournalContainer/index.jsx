@@ -41,7 +41,7 @@ const JournalContainer = (props) => {
   const signUpDate = user && new Date(user.signUpDate);
 
   const [filteredActivities, setFilteredActivities] = useState(ActivityOptions.map(op => op.value));
-  const [dateRange, setDateRange] = useState({ start: signUpDate, end: new Date() });
+  const [dateRange, setDateRange] = useState({ startDate: moment(signUpDate), endDate: moment() });
   const [sortBy, setSortBy] = useState(SortTrainingOptions[0]);
 
   const createTrainingSubmitHandler = isEdit => (training) => {
@@ -69,12 +69,8 @@ const JournalContainer = (props) => {
     setFilteredActivities(newValue);
   };
 
-  const handleDateRangeApply = (event, picker) => {
-    const {
-      startDate: { _d: start },
-      endDate: { _d: end },
-    } = picker;
-    setDateRange({ start, end });
+  const handleDateRangeApply = (datePicker) => {
+    setDateRange(datePicker);
   };
 
   const handleSortBySelect = selectedOption => setSortBy(selectedOption.value);
@@ -82,8 +78,8 @@ const JournalContainer = (props) => {
   const filterByActivities = trainings => trainings.filter(t => filteredActivities.includes(t.activity));
 
   const filterByDateRange = (trainings) => {
-    const startMoment = moment(dateRange.start).startOf('day');
-    const endMoment = moment(dateRange.end).startOf('day');
+    const startMoment = dateRange.startDate.startOf('day');
+    const endMoment = dateRange.endDate.startOf('day');
     return trainings.filter((t) => {
       const tMoment = moment(t.date).startOf('day');
       return (startMoment.diff(tMoment, 'days') <= 0 && endMoment.diff(tMoment, 'days') >= 0);
@@ -141,7 +137,7 @@ const JournalContainer = (props) => {
     <JournalWrapper>
       <Button color="primary" size="lg" onClick={() => showTrainingModal(false)}><PlusThickIcon /> Add training</Button>
       <FilterPanel
-        minDate={signUpDate}
+        minDate={moment(signUpDate)}
         handleActivitiesSelect={handleActivitiesSelect}
         dateRange={dateRange}
         handleDateRangeApply={handleDateRangeApply}
@@ -164,7 +160,7 @@ JournalContainer.propTypes = {
   fetchTrainings: PropTypes.func.isRequired,
   reduxFormInitialize: PropTypes.func.isRequired,
   user: User,
-  trainings: PropTypes.arrayOf(Training),
+  trainings: PropTypes.arrayOf(Training).isRequired,
   addTraining: PropTypes.func.isRequired,
   deleteTraining: PropTypes.func.isRequired,
   editTraining: PropTypes.func.isRequired,
@@ -173,7 +169,6 @@ JournalContainer.propTypes = {
 
 JournalContainer.defaultProps = {
   user: {},
-  trainings: [],
 };
 
 const mapStateToProps = ({ currentUser, journal }) => {
