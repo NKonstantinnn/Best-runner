@@ -6,7 +6,7 @@ import moment, { Moment } from 'moment';
 
 import Select from '../../../shared/redux-form-components/Select';
 import DatePicker from '../../../shared/redux-form-components/DatePicker';
-import Slider from '../../../shared/redux-form-components/CustomSlider';
+import Slider from '../../../shared/redux-form-components/Slider';
 import CustomField from '../../../shared/redux-form-components/CustomField';
 import {
   TrainingModalContent,
@@ -43,7 +43,10 @@ const TrainingModal = (props) => {
             containerStyles={{ display: 'block' }}
           />
         </FormGroup>
-        <Field name="distance" component={Slider} label="Distance" min={0.01} max={100} step={0.01} />
+        <FormGroup>
+          <Label>Distance</Label>
+          <Field name="distance" component={Slider} min={0.01} max={100} step={0.01} />
+        </FormGroup>
         <CustomField name="comment" id="comment" component={Input} label="Comment" type="textarea" />
         <TrainingModalFooter>
           <Button outline color="primary" onClick={handleCancel}>Cancel</Button>

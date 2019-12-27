@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import ReactSlider from 'react-slider';
-import { Input } from 'reactstrap';
 
 import { WhiteColor, PrimaryColor, GrayColor } from '../../styled/colors';
 
@@ -24,17 +23,6 @@ export const StyledTrack = styled.div`
   transform: translateY(-50%);
   background: ${props => (props.index === 0 ? PrimaryColor : GrayColor)};
   border-radius: 999px;
-`;
-
-export const SliderWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const SliderInput = styled(Input)`
-  margin-left: 20px;
-  width: 25%;
 `;
 
 export default StyledSlider;
