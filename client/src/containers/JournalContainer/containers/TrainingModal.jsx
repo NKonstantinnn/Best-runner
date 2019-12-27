@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
-import { Button, Input } from 'reactstrap';
+import { Button, Input, FormGroup, Label } from 'reactstrap';
+import moment, { Moment } from 'moment';
 
-import Select from '../../../shared/redux-form-components/CustomSelect';
-import DatePicker from '../../../shared/redux-form-components/CustomDatePicker';
-import Slider from '../../../shared/redux-form-components/CustomSlider';
+import Select from '../../../shared/redux-form-components/Select';
+import DatePicker from '../../../shared/redux-form-components/DatePicker';
+import Slider from '../../../shared/redux-form-components/Slider';
 import CustomField from '../../../shared/redux-form-components/CustomField';
 import {
   TrainingModalContent,
@@ -26,17 +27,26 @@ const TrainingModal = (props) => {
     <TrainingModalContent>
       <TrainingModalTitle>{actionName} training</TrainingModalTitle>
       <TrainingModalForm onSubmit={handleSubmit}>
-        <Field name="activity" component={Select} label="Activity" options={ActivityOptions} />
-        <Field
-          name="date"
-          component={DatePicker}
-          label="Date"
-          minDate={minDate}
-          maxDate={new Date()}
-          singleDatePicker
-          opens="right"
-        />
-        <Field name="distance" component={Slider} label="Distance" min={0.01} max={100} step={0.01} />
+        <FormGroup>
+          <Label>Activity</Label>
+          <Field name="activity" component={Select} options={ActivityOptions} />
+        </FormGroup>
+        <FormGroup>
+          <Label>Date</Label>
+          <Field
+            name="date"
+            component={DatePicker}
+            minDate={minDate}
+            maxDate={moment()}
+            singleDatePicker
+            opens="right"
+            containerStyles={{ display: 'block' }}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>Distance</Label>
+          <Field name="distance" component={Slider} min={0.01} max={100} step={0.01} />
+        </FormGroup>
         <CustomField name="comment" id="comment" component={Input} label="Comment" type="textarea" />
         <TrainingModalFooter>
           <Button outline color="primary" onClick={handleCancel}>Cancel</Button>
@@ -49,7 +59,7 @@ const TrainingModal = (props) => {
 
 TrainingModal.propTypes = {
   handleCancel: PropTypes.func.isRequired,
-  minDate: PropTypes.instanceOf(Date).isRequired,
+  minDate: PropTypes.instanceOf(Moment).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   isEdit: PropTypes.bool.isRequired,
 };

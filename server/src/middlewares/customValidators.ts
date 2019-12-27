@@ -62,7 +62,7 @@ const isActivityType = (activity: string): boolean => ActivityType[activity.toUp
 
 const isDate = (date: string): boolean => new Date(date).toString() !== 'Invalid Date';
 
-const isMoreSignUpDate = (date: string, signUpDate: string): boolean => new Date(date).getTime() > new Date(signUpDate).getTime();
+const isMoreSignUpDate = (date: string, signUpDate: string): boolean => new Date(date).getTime() >= new Date(signUpDate).getTime();
 
 const isNotMoreCurrentDate = (date: string): boolean => new Date(date).getTime() <= Date.now();
 
