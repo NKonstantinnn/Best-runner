@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { Button, Input } from 'reactstrap';
+import moment, { Moment } from 'moment';
 
 import Select from '../../../shared/redux-form-components/CustomSelect';
-import DatePicker from '../../../shared/redux-form-components/CustomDatePicker';
+import DatePicker from '../../../shared/redux-form-components/DatePicker';
 import Slider from '../../../shared/redux-form-components/CustomSlider';
 import CustomField from '../../../shared/redux-form-components/CustomField';
 import {
@@ -30,9 +31,8 @@ const TrainingModal = (props) => {
         <Field
           name="date"
           component={DatePicker}
-          label="Date"
           minDate={minDate}
-          maxDate={new Date()}
+          maxDate={moment()}
           singleDatePicker
           opens="right"
         />
@@ -49,7 +49,7 @@ const TrainingModal = (props) => {
 
 TrainingModal.propTypes = {
   handleCancel: PropTypes.func.isRequired,
-  minDate: PropTypes.instanceOf(Date).isRequired,
+  minDate: PropTypes.instanceOf(Moment).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   isEdit: PropTypes.bool.isRequired,
 };

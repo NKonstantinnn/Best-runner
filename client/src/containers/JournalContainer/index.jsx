@@ -38,17 +38,21 @@ const JournalContainer = (props) => {
   );
 
   const { user, isFetching } = props;
-  const signUpDate = user && new Date(user.signUpDate);
+  const signUpDate = user ? moment(user.signUpDate) : moment();
 
   const [filteredActivities, setFilteredActivities] = useState(ActivityOptions.map(op => op.value));
-  const [dateRange, setDateRange] = useState({ startDate: moment(signUpDate), endDate: moment() });
+  const [dateRange, setDateRange] = useState({ startDate: signUpDate, endDate: moment() });
   const [sortBy, setSortBy] = useState(SortTrainingOptions[0].value);
 
   const createTrainingSubmitHandler = isEdit => (training) => {
+    const newTraining = {
+      ...training,
+      date: training.date.toDate(),
+    };
     if (isEdit) {
-      props.editTraining(training);
+      props.editTraining(newTraining);
     } else {
-      props.addTraining(training);
+      props.addTraining(newTraining);
     }
     props.hideModal();
   };
@@ -61,7 +65,7 @@ const JournalContainer = (props) => {
       onSubmit: createTrainingSubmitHandler(isEdit),
     };
     props.showModal('TrainingModal', modalProps);
-    props.reduxFormInitialize('TrainingForm', initData);
+    props.reduxFormInitialize('TrainingForm', !isEdit ? initData : { ...initData, date: moment(initData.date) });
   };
 
   const handleActivitiesSelect = (selectedOptions) => {
@@ -136,7 +140,7 @@ const JournalContainer = (props) => {
     <JournalWrapper>
       <Button color="primary" size="lg" onClick={() => showTrainingModal(false)}><PlusThickIcon /> Add training</Button>
       <FilterPanel
-        minDate={moment(signUpDate)}
+        minDate={signUpDate}
         dateRange={dateRange}
         sortBy={sortBy}
         filteredActivities={filteredActivities}

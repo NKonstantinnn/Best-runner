@@ -29,8 +29,10 @@ const CustomDatePicker = (props) => {
   };
 
   const formatValue = (pickerValue) => {
+    if (!pickerValue) return 'Invalid Date';
+
     if (singleDatePicker) {
-      return value.format(format);
+      return pickerValue.format(format);
     }
 
     const formatedStart = pickerValue.startDate.format(format);
