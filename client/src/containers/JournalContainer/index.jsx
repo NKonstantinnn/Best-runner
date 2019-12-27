@@ -68,13 +68,9 @@ const JournalContainer = (props) => {
     props.reduxFormInitialize('TrainingForm', !isEdit ? initData : { ...initData, date: moment(initData.date) });
   };
 
-  const handleActivitiesSelect = (selectedOptions) => {
-    setFilteredActivities(selectedOptions);
-  };
+  const handleActivitiesSelect = selectedOptions => setFilteredActivities(selectedOptions);
 
-  const handleDateRangeApply = (datePicker) => {
-    setDateRange(datePicker);
-  };
+  const handleDateRangeApply = datePicker => setDateRange(datePicker);
 
   const handleSortBySelect = selectedOption => setSortBy(selectedOption);
 
