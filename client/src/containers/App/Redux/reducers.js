@@ -5,6 +5,7 @@ import signUpReducer from '../../AuthContainer/redux/reducer';
 import currentUserReducer from './currentUserReducer';
 import appReducer from './appReducer';
 import journalReducer from '../../JournalContainer/redux/reducer';
+import chartsReducer from '../../ChartsContainer/redux/reducer';
 
 export default {
   app: appReducer,
@@ -13,4 +14,5 @@ export default {
   signUp: signUpReducer,
   currentUser: currentUserReducer,
   journal: journalReducer,
+  charts: chartsReducer,
 };

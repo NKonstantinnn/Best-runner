@@ -8,3 +8,8 @@ export const RedColor = '#DC3545';
 
 export const InputBorderColor = '#CCCCCC';
 export const InputTextColor = '#495057';
+
+export const SkiingColor = '#39CCCC';
+export const BicycleColor = '#FFDC00';
+export const RunningColor = '#750DC9';
+export const WalkingColor = '#01FF70';

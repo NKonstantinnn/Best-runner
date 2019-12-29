@@ -28,3 +28,18 @@ export const RangeDatePickerValue = PropTypes.shape({
   startDate: PropTypes.instanceOf(Moment),
   endDate: PropTypes.instanceOf(Moment),
 });
+
+export const StructuredTrainings = PropTypes.shape({
+  Running: PropTypes.arrayOf(Training),
+  Walking: PropTypes.arrayOf(Training),
+  Skiing: PropTypes.arrayOf(Training),
+  Bicycle: PropTypes.arrayOf(Training),
+});
+
+export const DatasetProp = PropTypes.shape({
+  label: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  borderColor: PropTypes.string,
+  fill: PropTypes.bool,
+  data: PropTypes.arrayOf(PropTypes.number),
+});
