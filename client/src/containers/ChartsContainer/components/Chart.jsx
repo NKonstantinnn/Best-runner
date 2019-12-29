@@ -3,6 +3,7 @@ import { Line } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
 
 import { DatasetProp } from '../../../shared/prop-types';
+import StyledChart from './styled/Chart';
 
 const Chart = (props) => {
   const { dateLabels, datasets } = props;
@@ -32,7 +33,9 @@ const Chart = (props) => {
     },
   };
   return (
-    <Line data={data} options={options} />
+    <StyledChart>
+      <Line data={data} options={options} />
+    </StyledChart>
   );
 };
 
