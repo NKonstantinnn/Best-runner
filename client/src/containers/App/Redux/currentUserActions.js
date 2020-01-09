@@ -23,6 +23,7 @@ export const fetchCurrentUser = history => async (dispatch) => {
       dispatch(fetchCurrentUserFailure('Sign in to your profile!'));
     }
   } catch (error) {
+    history.push('/signin');
     dispatch(fetchCurrentUserFailure(error));
   }
 };
